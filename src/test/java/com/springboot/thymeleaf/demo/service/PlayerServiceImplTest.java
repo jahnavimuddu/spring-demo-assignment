@@ -62,8 +62,14 @@ public class PlayerServiceImplTest {
     }
 
     @Test
-    public void onSearchByNotFound(){
+    public void onSearchByNull(){
         List<Player> players = playerService.searchBy(null);
+        Assert.assertEquals(playerList.size(),players.size());
+    }
+
+    @Test
+    public void onSearchByNotFound(){
+        List<Player> players = playerService.searchBy("  ");
         Assert.assertEquals(playerList.size(),players.size());
     }
 

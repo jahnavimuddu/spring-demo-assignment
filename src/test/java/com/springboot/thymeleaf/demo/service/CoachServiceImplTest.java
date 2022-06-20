@@ -89,6 +89,13 @@ public class CoachServiceImplTest {
         Assert.assertEquals(size, players.size());
     }
 
+    @Test
+    public void onSearchByGameNameNotFound(){
+        int size= playerList.size();
+        List<Player> players = coachService.searchByGame("  ");
+        Assert.assertEquals(size, players.size());
+    }
+
    @Test
    public void onSearchByGameName(){
         int size= playerList.size();
