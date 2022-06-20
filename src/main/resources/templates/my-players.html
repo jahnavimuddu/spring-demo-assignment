@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Coach Directory</title>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <hr>
+    <h3>My Details :</h3>
+    <div class ="row">
+        <div class ="col">
+            User Name: <span sec:authentication="name"></span>
+            <br>
+            Role: <span sec:authentication="principal.authorities"></span>
+            <br><br>
+        </div>
+
+    </div>
+    <hr>
+    <br><br>
+    <strong>
+        <h4>My Players :</h4>
+    </strong>
+
+    <table class="table table-bordered table-hover">
+        <caption hidden>My Players :</caption>
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Game Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr class="table-info" th:each="tempPlayer : ${myPlayers}">
+
+            <td th:text="${tempPlayer.firstName}" />
+            <td th:text="${tempPlayer.lastName}" />
+            <td th:text="${tempPlayer.email}" />
+            <td th:text="${tempPlayer.gameName}" />
+            <td>
+                <div>
+
+                    <!-- Add "remove player" button/link -->
+                    <a th:href="@{/coachLanding/removePlayer(playerId=${tempPlayer.id},coachId=${session.user.id})}"
+                       class="btn btn-outline-success btn-sm"
+                       onclick="if (!(confirm('Are you sure you want to remove this player?'))) return false">
+                        Remove
+                    </a>
+
+                </div>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <hr><br><br>
+    <strong>
+        <h4>Other Players :</h4>
+    </strong>
+
+    <table class="table table-bordered table-hover">
+        <caption>Other players : </caption>
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Game Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr class="table-info" th:each="tempPlayer : ${otherPlayers}">
+
+            <td th:text="${tempPlayer.firstName}" />
+            <td th:text="${tempPlayer.lastName}" />
+            <td th:text="${tempPlayer.email}" />
+            <td th:text="${tempPlayer.gameName}" />
+            <td>
+                <div>
+
+                    <!-- Add "assign player" button/link -->
+                    <a th:href="@{/coachLanding/assignPlayer(playerId=${tempPlayer.id},coachId=${session.user.id})}"
+                       class="btn btn-outline-success btn-sm"
+                       onclick="if (!(confirm('Are you sure you want to assign this player to you?'))) return false">
+                        Assign to self
+                    </a>
+
+                </div>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+
+    <!-- Add a logout button -->
+    <form action="#" th:action="@{/coachLanding/list}"
+          method="GET">
+
+        <input type="submit" value="Back" class="btn btn-outline-warning mt-2" />
+
+    </form>
+
+</div>
+
+</body>
+</html>
+
+
+

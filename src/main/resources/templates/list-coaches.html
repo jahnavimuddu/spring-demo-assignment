@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Coach Directory</title>
+
+</head>
+
+<body>
+
+<div class="container">
+    <strong>
+        <h3>Coach Directory</h3>
+    </strong>
+    <hr>
+    <h4>My Details :</h4>
+    <div class ="row">
+        <div class ="col">
+            User Name: <span sec:authentication="name"></span>
+            <br>
+            Role: <span sec:authentication="principal.authorities"></span>
+            <br><br>
+        </div>
+
+        <div class ="col" sec:authorize="hasAnyRole('ROLE_COACH')">
+            <!-- Add "update" button/link -->
+            <a th:href="@{/coachLanding/showFormForUpdate(coachId=${session.user.id})}"
+               class="btn btn-outline-info btn-sm">
+                Update Profile
+            </a>
+        </div>
+
+        <div class ="col" sec:authorize="hasAnyRole('ROLE_COACH')">
+            <!-- Add "update" button/link -->
+            <a th:href="@{/coachLanding/viewMyPlayers(coachId=${session.user.id})}"
+               class="btn btn-outline-info btn-sm">
+                View My Players
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <form th:action="@{/coachLanding/searchByName}" class="form-inline">
+            <div class ="col">
+                <input class="form-control" type="search" name="playerName" placeholder="Search by name" />
+            </div>
+            <div class = "col">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+        </form>
+        <form th:action="@{/coachLanding/searchByGame}" class="form-inline">
+            <div class ="col">
+                <input class="form-control" type="search" name="gameName" placeholder="Search by game name" />
+            </div>
+            <div class = "col">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+    <br><br>
+    <strong>
+        <h4>Player Data</h4>
+    </strong>
+
+    <table class="table table-bordered table-hover">
+        <caption hidden>Player Data</caption>
+        <thead class="thead-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Game Name</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr class="table-info" th:each="tempPlayer : ${players}">
+
+            <td th:text="${tempPlayer.firstName}" />
+            <td th:text="${tempPlayer.lastName}" />
+            <td th:text="${tempPlayer.email}" />
+            <td th:text="${tempPlayer.gameName}" />
+
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Add a logout button -->
+    <form action="#" th:action="@{/logout}"
+          method="POST">
+
+        <input type="submit" value="Logout" class="btn btn-outline-warning mt-2" />
+
+    </form>
+
+</div>
+
+</body>
+</html>
+
+
+
