@@ -12,11 +12,11 @@ public interface PlayerService extends UserDetailsService {
 
     public Player findById(long theId);
 
-    public void save(CrmUser crmUser);
+    public void saveCrmUser(CrmUser crmUser);
 
     void saveForUpdateForm(Player thePlayer);
 
-    public void save(Player thePlayer);
+    public void saveCrmUser(Player thePlayer);
 
     public List<Player> findAll();
 

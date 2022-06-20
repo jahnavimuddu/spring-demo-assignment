@@ -116,7 +116,7 @@ public class CoachController {
         Coach theCoach = coachService.findById(coachId);
         Player player = playerService.findById(theId);
         theCoach.add(player);
-        playerService.save(player);
+        playerService.saveCrmUser(player);
         return "redirect:/coachLanding/viewMyPlayers?coachId=" + theCoach.getId() ;
     }
 
@@ -127,7 +127,7 @@ public class CoachController {
         Coach theCoach = coachService.findById(coachId);
         Player player = playerService.findById(theId);
         theCoach.remove(player);
-        playerService.save(player);
+        playerService.saveCrmUser(player);
         return "redirect:/coachLanding/viewMyPlayers?coachId=" + theCoach.getId() ;
     }
 

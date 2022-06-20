@@ -88,9 +88,8 @@ public class CoachServiceImpl implements CoachService{
         return results;
     }
 
-    @Override
     @Transactional
-    public void save(CrmUser crmUser) {
+    public void saveCrmUser(CrmUser crmUser) {
         Coach coach = new Coach();
         coach.setUserName(crmUser.getUserName());
         coach.setPassword(passwordEncoder.encode(crmUser.getPassword()));
@@ -100,7 +99,7 @@ public class CoachServiceImpl implements CoachService{
         coach.setGameName(crmUser.getGameName());
 
         //save player in database
-        coachDao.saveCoach(coach);
+        coachRepository.save(coach);
     }
 
 

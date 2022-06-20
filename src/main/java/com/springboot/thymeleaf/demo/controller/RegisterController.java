@@ -74,7 +74,7 @@ public class RegisterController {
             }
 
             // create user account
-            playerService.save(theCrmUser);
+            playerService.saveCrmUser(theCrmUser);
 
             logger.info("Successfully created user!!");
             return "registration-confirmation";
@@ -91,7 +91,7 @@ public class RegisterController {
             }
 
             // create user account
-            coachService.save(theCrmUser);
+            coachService.saveCrmUser(theCrmUser);
 
             logger.info("Successfully created user!!");
             return "registration-confirmation";

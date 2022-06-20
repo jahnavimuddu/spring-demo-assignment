@@ -29,8 +29,10 @@ public class PlayerServiceImpl implements PlayerService{
     private PlayerRepository playerRepository;
 
     @Autowired
-    public PlayerServiceImpl(PlayerRepository thePlayerRepository){
+    public PlayerServiceImpl(PlayerRepository thePlayerRepository,BCryptPasswordEncoder thePasswordEncoder, PlayerDao thePlayerDao){
         playerRepository = thePlayerRepository;
+        passwordEncoder = thePasswordEncoder;
+        playerDao = thePlayerDao;
     }
 
     @Override
@@ -61,7 +63,7 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public void save(Player thePlayer) {
+    public void saveCrmUser(Player thePlayer) {
         playerRepository.save(thePlayer);
     }
 
@@ -107,7 +109,7 @@ public class PlayerServiceImpl implements PlayerService{
 
     @Override
     @Transactional
-    public void save(CrmUser crmUser) {
+    public void saveCrmUser(CrmUser crmUser) {
         Player player = new Player();
         player.setUserName(crmUser.getUserName());
         player.setPassword(passwordEncoder.encode(crmUser.getPassword()));

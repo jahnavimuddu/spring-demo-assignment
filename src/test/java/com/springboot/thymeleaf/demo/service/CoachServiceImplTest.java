@@ -10,15 +10,12 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.runners.JUnit38ClassRunner;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.transaction.Transactional;
@@ -124,7 +121,7 @@ public class CoachServiceImplTest {
         crmUser.setEmail("ram@gmail.com");
         crmUser.setGameName("Hockey");
         crmUser.setUserType("Coach");
-        coachService.save(crmUser);
+        coachService.saveCrmUser(crmUser);
     }
 }
 

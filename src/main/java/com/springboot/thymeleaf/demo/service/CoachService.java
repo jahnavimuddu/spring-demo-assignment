@@ -12,7 +12,7 @@ public interface CoachService extends UserDetailsService {
 
     public Coach findById(long theId);
 
-    public void save(CrmUser crmUser);
+    public void saveCrmUser(CrmUser crmUser);
 
     public void save(Coach theCoach);
 
