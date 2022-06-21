@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.mockito.Mockito.when;
+
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CoachServiceImplTest {
@@ -129,6 +131,7 @@ public class CoachServiceImplTest {
         crmUser.setGameName("Hockey");
         crmUser.setUserType("Coach");
         coachService.saveCrmUser(crmUser);
+        Assert.assertEquals("Coach",crmUser.getUserType());
     }
 }
 
