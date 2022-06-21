@@ -139,6 +139,7 @@ public class PlayerServiceImplTest {
         crmUser.setGameName("Hockey");
         crmUser.setUserType("Player");
         playerService.saveCrmUser(crmUser);
+        Assert.assertEquals("Player",crmUser.getUserType());
     }
 
     @Test
